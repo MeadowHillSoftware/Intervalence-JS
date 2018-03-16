@@ -118,6 +118,23 @@ oIntervalence.handleCheckbox = function(event) {
             $('#major-9th').prop('checked', true);
             $('#minor-9th').prop('checked', true);
         }
+    } else if (sId === "all-simple") {
+        if (target.is(':checked')) {
+            $('#major-2nd').prop('checked', true);
+            $('#minor-2nd').prop('checked', true);
+            $('#major-3rd').prop('checked', true);
+            $('#minor-3rd').prop('checked', true);
+            $('#augmented-4th').prop('checked', true);
+            $('#perfect-4th').prop('checked', true);
+            $('#augmented-5th').prop('checked', true);
+            $('#diminished-5th').prop('checked', true);
+            $('#perfect-5th').prop('checked', true);
+            $('#major-6th').prop('checked', true);
+            $('#minor-6th').prop('checked', true);
+            $('#diminished-7th').prop('checked', true);
+            $('#major-7th').prop('checked', true);
+            $('#minor-7th').prop('checked', true);
+        }
     }
     console.log(sId);
 };
