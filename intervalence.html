@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Intervalence</title>
+    </head>
+    <body id="body">
+        <table>
+            <tr>
+                <td>
+                    <input type="checkbox" id="minor-2nd"/>Minor 2nd
+                </td>
+                <td>
+                    <input type="checkbox" id="diminished-5th"/>Diminished 5th
+                </td>
+                <td>
+                    <input type="checkbox" id="minor-7th"/>Minor 7th
+                </td>
+                <td>
+                    <input type="checkbox" id="major-13th"/>Major 13th
+                </td>
+                <td>
+                    <input type="checkbox" id="all-7ths"/>7ths
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="major-2nd"/>Major 2nd
+                </td>
+                <td>
+                    <input type="checkbox" id="perfect-5th"/>Perfect 5th
+                </td>
+                <td>
+                    <input type="checkbox" id="major-7th"/>Major 7th
+                </td>
+                <td>
+                    <input type="checkbox" id="all-2nds"/>2nds
+                </td>
+                <td>
+                    <input type="checkbox" id="all-9ths"/>9ths
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="minor-3rd"/>Minor 3rd
+                </td>
+                <td>
+                    <input type="checkbox" id="augmented-5th"/>Augmented 5th
+                </td>
+                <td>
+                    <input type="checkbox" id="minor-9th"/>Minor 9th
+                </td>
+                <td>
+                    <input type="checkbox" id="all-3rds"/>3rds
+                </td>
+                <td>
+                    <input type="checkbox" id="all-simple"/>Simple Intervals
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="major-3rd"/>Major 3rd
+                </td>
+                <td>
+                    <input type="checkbox" id="minor-6th"/>Minor 6th
+                </td>
+                <td>
+                    <input type="checkbox" id="major-9th"/>Major 9th
+                </td>
+                <td>
+                    <input type="checkbox" id="all-4ths"/>4ths
+                </td>
+                <td>
+                    <input type="checkbox" id="all-compound"/>Compound Intervals
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="perfect-4th"/>Perfect 4th
+                </td>
+                <td>
+                    <input type="checkbox" id="major-6th"/>Major 6th
+                </td>
+                <td>
+                    <input type="checkbox" id="augmented-9th"/>Augmented 9th
+                </td>
+                <td>
+                    <input type="checkbox" id="all-5ths"/>5ths
+                </td>
+                <td>
+                    <input type="checkbox" id="all-intervals"/>All Intervals
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="augmented-4th"/>Augmented 4th
+                </td>
+                <td>
+                    <input type="checkbox" id="diminished-7th"/>Diminished 7th
+                </td>
+                <td>
+                    <input type="checkbox" id="perfect-11th"/>Perfect 11th
+                </td>
+                <td>
+                    <input type="checkbox" id="all-6ths"/>6ths
+                </td>
+                <td>
+                    <button id="clear-button">Clear</button>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <td>
+                    <span>Question: </span>
+                </td>
+                <td>
+                    <span id="question"></span>
+                </td>
+            </tr>
+        <table>
+            <tr>
+                <td>Answer: </td>
+                <td>
+                    <select id="letter">
+                        <option id="a-note">A</option>
+                        <option id="b-note">B</option>
+                        <option id="c-note">C</option>
+                        <option id="d-note">D</option>
+                        <option id="e-note">E</option>
+                        <option id="f-note">F</option>
+                        <option id="g-note">G</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="accidental">
+                        <option id="double-flat">Double-Flat</option>
+                        <option id="flat">Flat</option>
+                        <option id="natural">Natural</option>
+                        <option id="sharp">Sharp</option>
+                        <option id="double-sharp">Double-Sharp</option>
+                    </select>
+                </td>
+                <td>
+                    <button id="enter-button">Enter</button>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div id="results"></div>
+    <script src="./scripts/jquery-3.1.1.js"></script>
+    <script src="./scripts/intervalence.js"></script>
+    </body>
+</html>
