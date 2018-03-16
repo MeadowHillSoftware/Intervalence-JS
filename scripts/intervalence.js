@@ -88,6 +88,12 @@ oIntervalence.handleCheckbox = function(event) {
             $('#augmented-4th').prop('checked', true);
             $('#perfect-4th').prop('checked', true);
         }
+    } else if (sId === "all-5ths") {
+        if (target.is(':checked')) {
+            $('#augmented-5th').prop('checked', true);
+            $('#diminished-5th').prop('checked', true);
+            $('#perfect-5th').prop('checked', true);
+        }
     }
     console.log(sId);
 };
