@@ -69,6 +69,11 @@ oIntervalence.addMainEventListeners = function() {
         .on('click', oIntervalence.handleCheckbox);
 };
 
+oIntervalence.uncheckSimple = function() {
+    $('#all-simple').prop('checked', false);
+    $('#all-intervals').prop('checked', false);
+};
+
 oIntervalence.handleCheckbox = function(event) {
     event.stopPropagation;
     var target = $(event.target);
@@ -77,6 +82,8 @@ oIntervalence.handleCheckbox = function(event) {
         if (target.is(':checked')) {
             $('#major-2nd').prop('checked', true);
             $('#minor-2nd').prop('checked', true);
+        } else {
+            oIntervalence.uncheckSimple();
         }
     } else if (sId === "all-3rds") {
         if (target.is(':checked')) {
@@ -104,6 +111,12 @@ oIntervalence.handleCheckbox = function(event) {
             $('#diminished-7th').prop('checked', true);
             $('#major-7th').prop('checked', true);
             $('#minor-7th').prop('checked', true);
+        }
+    } else if (sId === "all-9ths") {
+        if (target.is(':checked')) {
+            $('#augmented-9th').prop('checked', true);
+            $('#major-9th').prop('checked', true);
+            $('#minor-9th').prop('checked', true);
         }
     }
     console.log(sId);
