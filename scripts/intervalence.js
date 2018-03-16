@@ -264,6 +264,95 @@ oIntervalence.handleCheckbox = function(event) {
             $('#perfect-11th').prop('checked', false);
             $('#major-13th').prop('checked', false);
         }
+    } else if (sId === "augmented-4th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-4ths').prop('checked', false);
+        }
+    } else if (sId === "augmented-5th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-5ths').prop('checked', false);
+        }
+    } else if (sId === "augmented-9th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-9ths').prop('checked', false);
+        }
+    } else if (sId === "diminished-5th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-5ths').prop('checked', false);
+        }
+    } else if (sId === "diminished-7th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-7ths').prop('checked', false);
+        }
+    } else if (sId === "major-2nd") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-2nds').prop('checked', false);
+        }
+    } else if (sId === "major-3rd") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-3rds').prop('checked', false);
+        }
+    } else if (sId === "major-6th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-6ths').prop('checked', false);
+        }
+    } else if (sId === "major-7th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-7ths').prop('checked', false);
+        }
+    } else if (sId === "major-9th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckCompound();
+            $('#all-9ths').prop('checked', false);
+        }
+    } else if (sId === "major-13th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckCompound();
+        }
+    } else if (sId === "minor-2nd") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-2nds').prop('checked', false);
+        }
+    } else if (sId === "minor-3rd") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-3rds').prop('checked', false);
+        }
+    } else if (sId === "minor-6th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-6ths').prop('checked', false);
+        }
+    } else if (sId === "minor-7th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-7ths').prop('checked', false);
+        }
+    } else if (sId === "minor-9th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckCompound();
+            $('#all-9ths').prop('checked', false);
+        }
+    } else if (sId === "perfect-4th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-4ths').prop('checked', false);
+        }
+    } else if (sId === "perfect-5th") {
+        if (!target.is(':checked')) {
+            oIntervalence.uncheckSimple();
+            $('#all-5ths').prop('checked', false);
+        }
     }
     console.log(sId);
 };
