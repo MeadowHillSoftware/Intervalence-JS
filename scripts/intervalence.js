@@ -70,7 +70,7 @@ oIntervalence.addMainEventListeners = function() {
 };
 
 oIntervalence.handleCheckbox = function(event) {
-    event.stopPropagation;
+    event.stopPropagation();
     var target = $(event.target);
     var sId = target.attr('id');
     if (sId === "all-2nds") {
@@ -354,7 +354,39 @@ oIntervalence.handleCheckbox = function(event) {
             $('#all-5ths').prop('checked', false);
         }
     }
-    console.log(sId);
+};
+
+oIntervalence.handleClearButton = function(event) {
+    event.stopPropagation();
+    $('#all-2nds').prop('checked', false);
+    $('#all-3rds').prop('checked', false);
+    $('#all-4ths').prop('checked', false);
+    $('#all-5ths').prop('checked', false);
+    $('#all-6ths').prop('checked', false);
+    $('#all-7ths').prop('checked', false);
+    $('#all-9ths').prop('checked', false);
+    $('#all-simple').prop('checked', false);
+    $('#all-compound').prop('checked', false);
+    $('#all-intervals').prop('checked', false);
+    $('#major-2nd').prop('checked', false);
+    $('#minor-2nd').prop('checked', false);
+    $('#major-3rd').prop('checked', false);
+    $('#minor-3rd').prop('checked', false);
+    $('#augmented-4th').prop('checked', false);
+    $('#perfect-4th').prop('checked', false);
+    $('#augmented-5th').prop('checked', false);
+    $('#diminished-5th').prop('checked', false);
+    $('#perfect-5th').prop('checked', false);
+    $('#major-6th').prop('checked', false);
+    $('#minor-6th').prop('checked', false);
+    $('#diminished-7th').prop('checked', false);
+    $('#major-7th').prop('checked', false);
+    $('#minor-7th').prop('checked', false);
+    $('#augmented-9th').prop('checked', false);
+    $('#major-9th').prop('checked', false);
+    $('#minor-9th').prop('checked', false);
+    $('#perfect-11th').prop('checked', false);
+    $('#major-13th').prop('checked', false);
 };
 
 oIntervalence.uncheckCompound = function() {
