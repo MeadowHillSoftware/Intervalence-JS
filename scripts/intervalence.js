@@ -135,6 +135,14 @@ oIntervalence.handleCheckbox = function(event) {
             $('#major-7th').prop('checked', true);
             $('#minor-7th').prop('checked', true);
         }
+    } else if (sId === "all-compound") {
+        if (target.is(':checked')) {
+            $('#augmented-9th').prop('checked', true);
+            $('#major-9th').prop('checked', true);
+            $('#minor-9th').prop('checked', true);
+            $('#perfect-11th').prop('checked', true);
+            $('#major-13th').prop('checked', true);
+        }
     }
     console.log(sId);
 };
