@@ -69,334 +69,182 @@ oIntervalence.addMainEventListeners = function() {
         .on('click', oIntervalence.handleCheckbox);
 };
 
+oIntervalence.aAll2ndBoxes = ['#major-2nd', '#minor-2nd'];
+
+oIntervalence.aAll3rdBoxes = ['#major-3rd', '#minor-3rd'];
+
+oIntervalence.aAll4thBoxes = ['#augmented-4th', '#perfect-4th'];
+
+oIntervalence.aAll5thBoxes = [
+    '#augmented-5th',
+    '#diminished-5th',
+    '#perfect-5th'
+];
+
+oIntervalence.aAll6thBoxes = ['#major-6th', '#minor-6th'];
+
+oIntervalence.aAll7thBoxes = [
+    '#diminished-7th',
+    '#major-7th',
+    '#minor-7th'
+];
+
+oIntervalence.aAll9thBoxes = [
+    '#augmented-9th',
+    '#major-9th',
+    '#minor-9th'
+];
+
 oIntervalence.handleCheckbox = function(event) {
     event.stopPropagation();
     var target = $(event.target);
     var sId = target.attr('id');
+    var oGlobal = oIntervalence;
+    var oIntervals = oGlobal.oIntervals;
+    var bValue = target.is(':checked');
     if (sId === "all-2nds") {
-        if (target.is(':checked')) {
-            $('#major-2nd').prop('checked', true);
-            $('#minor-2nd').prop('checked', true);
-        } else {
-            oIntervalence.uncheckSimple();
-            $('#major-2nd').prop('checked', false);
-            $('#minor-2nd').prop('checked', false);
-        }
+        oGlobal.setCheckedProperty(oGlobal.aAll2ndBoxes, bValue);
     } else if (sId === "all-3rds") {
-        if (target.is(':checked')) {
-            $('#major-3rd').prop('checked', true);
-            $('#minor-3rd').prop('checked', true);
-        } else {
-            oIntervalence.uncheckSimple();
-            $('#major-3rd').prop('checked', false);
-            $('#minor-3rd').prop('checked', false);
-        }
+        oGlobal.setCheckedProperty(oGlobal.aAll3rdBoxes, bValue);
     } else if (sId === "all-4ths") {
-        if (target.is(':checked')) {
-            $('#augmented-4th').prop('checked', true);
-            $('#perfect-4th').prop('checked', true);
-        } else {
-            oIntervalence.uncheckSimple();
-            $('#augmented-4th').prop('checked', false);
-            $('#perfect-4th').prop('checked', false);
-        }
+        oGlobal.setCheckedProperty(oGlobal.aAll4thBoxes, bValue);
     } else if (sId === "all-5ths") {
-        if (target.is(':checked')) {
-            $('#augmented-5th').prop('checked', true);
-            $('#diminished-5th').prop('checked', true);
-            $('#perfect-5th').prop('checked', true);
-        } else {
-            oIntervalence.uncheckSimple();
-            $('#augmented-5th').prop('checked', false);
-            $('#diminished-5th').prop('checked', false);
-            $('#perfect-5th').prop('checked', false);
-        }
+        oGlobal.setCheckedProperty(oGlobal.aAll5thBoxes, bValue);
     } else if (sId === "all-6ths") {
-        if (target.is(':checked')) {
-            $('#major-6th').prop('checked', true);
-            $('#minor-6th').prop('checked', true);
-        } else {
-            oIntervalence.uncheckSimple();
-            $('#major-6th').prop('checked', false);
-            $('#minor-6th').prop('checked', false);
-        }
+        oGlobal.setCheckedProperty(oGlobal.aAll6thBoxes, bValue);
     } else if (sId === "all-7ths") {
-        if (target.is(':checked')) {
-            $('#diminished-7th').prop('checked', true);
-            $('#major-7th').prop('checked', true);
-            $('#minor-7th').prop('checked', true);
-        } else {
-            oIntervalence.uncheckSimple();
-            $('#diminished-7th').prop('checked', false);
-            $('#major-7th').prop('checked', false);
-            $('#minor-7th').prop('checked', false);
-        }
+        oGlobal.setCheckedProperty(oGlobal.aAll7thBoxes, bValue);
     } else if (sId === "all-9ths") {
-        if (target.is(':checked')) {
-            $('#augmented-9th').prop('checked', true);
-            $('#major-9th').prop('checked', true);
-            $('#minor-9th').prop('checked', true);
-        } else {
-            oIntervalence.uncheckCompound();
-            $('#augmented-9th').prop('checked', false);
-            $('#major-9th').prop('checked', false);
-            $('#minor-9th').prop('checked', false);
-        }
+        oGlobal.setCheckedProperty(oGlobal.aAll9thBoxes, bValue);
     } else if (sId === "all-simple") {
-        if (target.is(':checked')) {
-            $('#all-2nds').prop('checked', true);
-            $('#all-3rds').prop('checked', true);
-            $('#all-4ths').prop('checked', true);
-            $('#all-5ths').prop('checked', true);
-            $('#all-6ths').prop('checked', true);
-            $('#all-7ths').prop('checked', true);
-            $('#major-2nd').prop('checked', true);
-            $('#minor-2nd').prop('checked', true);
-            $('#major-3rd').prop('checked', true);
-            $('#minor-3rd').prop('checked', true);
-            $('#augmented-4th').prop('checked', true);
-            $('#perfect-4th').prop('checked', true);
-            $('#augmented-5th').prop('checked', true);
-            $('#diminished-5th').prop('checked', true);
-            $('#perfect-5th').prop('checked', true);
-            $('#major-6th').prop('checked', true);
-            $('#minor-6th').prop('checked', true);
-            $('#diminished-7th').prop('checked', true);
-            $('#major-7th').prop('checked', true);
-            $('#minor-7th').prop('checked', true);
-        } else {
-            $('#all-intervals').prop('checked', false);
-            $('#all-2nds').prop('checked', false);
-            $('#all-3rds').prop('checked', false);
-            $('#all-4ths').prop('checked', false);
-            $('#all-5ths').prop('checked', false);
-            $('#all-6ths').prop('checked', false);
-            $('#all-7ths').prop('checked', false);
-            $('#major-2nd').prop('checked', false);
-            $('#minor-2nd').prop('checked', false);
-            $('#major-3rd').prop('checked', false);
-            $('#minor-3rd').prop('checked', false);
-            $('#augmented-4th').prop('checked', false);
-            $('#perfect-4th').prop('checked', false);
-            $('#augmented-5th').prop('checked', false);
-            $('#diminished-5th').prop('checked', false);
-            $('#perfect-5th').prop('checked', false);
-            $('#major-6th').prop('checked', false);
-            $('#minor-6th').prop('checked', false);
-            $('#diminished-7th').prop('checked', false);
-            $('#major-7th').prop('checked', false);
-            $('#minor-7th').prop('checked', false);
+        oGlobal.setCheckedProperty(oGlobal.aAll2ndBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll3rdBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll4thBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll5thBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll6thBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll7thBoxes, bValue);
+        if (bValue === true) {
+            oGlobal.checkGroupBoxes();
         }
     } else if (sId === "all-compound") {
-        if (target.is(':checked')) {
+        oGlobal.setCheckedProperty(oGlobal.aAll9thBoxes, bValue);
+        $('#perfect-11th').prop('checked', bValue);
+        $('#major-13th').prop('checked', bValue);
+        if (bValue === true) {
             $('#all-9ths').prop('checked', true);
-            $('#augmented-9th').prop('checked', true);
-            $('#major-9th').prop('checked', true);
-            $('#minor-9th').prop('checked', true);
-            $('#perfect-11th').prop('checked', true);
-            $('#major-13th').prop('checked', true);
-        } else {
-            oIntervalence.uncheckCompound();
-            $('#all-9ths').prop('checked', false);
-            $('#augmented-9th').prop('checked', false);
-            $('#major-9th').prop('checked', false);
-            $('#minor-9th').prop('checked', false);
-            $('#perfect-11th').prop('checked', false);
-            $('#major-13th').prop('checked', false);
         }
     } else if (sId === "all-intervals") {
-        if (target.is(':checked')) {
-            $('#all-2nds').prop('checked', true);
-            $('#all-3rds').prop('checked', true);
-            $('#all-4ths').prop('checked', true);
-            $('#all-5ths').prop('checked', true);
-            $('#all-6ths').prop('checked', true);
-            $('#all-7ths').prop('checked', true);
-            $('#all-9ths').prop('checked', true);
+        oGlobal.setCheckedProperty(oGlobal.aAll2ndBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll3rdBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll4thBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll5thBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll6thBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll7thBoxes, bValue);
+        oGlobal.setCheckedProperty(oGlobal.aAll9thBoxes, bValue);
+        $('#perfect-11th').prop('checked', bValue);
+        $('#major-13th').prop('checked', bValue);
+        if (bValue === true) {
             $('#all-simple').prop('checked', true);
+            $('#all-9ths').prop('checked', true);
             $('#all-compound').prop('checked', true);
-            $('#major-2nd').prop('checked', true);
-            $('#minor-2nd').prop('checked', true);
-            $('#major-3rd').prop('checked', true);
-            $('#minor-3rd').prop('checked', true);
-            $('#augmented-4th').prop('checked', true);
-            $('#perfect-4th').prop('checked', true);
-            $('#augmented-5th').prop('checked', true);
-            $('#diminished-5th').prop('checked', true);
-            $('#perfect-5th').prop('checked', true);
-            $('#major-6th').prop('checked', true);
-            $('#minor-6th').prop('checked', true);
-            $('#diminished-7th').prop('checked', true);
-            $('#major-7th').prop('checked', true);
-            $('#minor-7th').prop('checked', true);
-            $('#augmented-9th').prop('checked', true);
-            $('#major-9th').prop('checked', true);
-            $('#minor-9th').prop('checked', true);
-            $('#perfect-11th').prop('checked', true);
-            $('#major-13th').prop('checked', true);
-        } else {
-            $('#all-2nds').prop('checked', false);
-            $('#all-3rds').prop('checked', false);
-            $('#all-4ths').prop('checked', false);
-            $('#all-5ths').prop('checked', false);
-            $('#all-6ths').prop('checked', false);
-            $('#all-7ths').prop('checked', false);
-            $('#all-9ths').prop('checked', false);
-            $('#all-simple').prop('checked', false);
-            $('#all-compound').prop('checked', false);
-            $('#major-2nd').prop('checked', false);
-            $('#minor-2nd').prop('checked', false);
-            $('#major-3rd').prop('checked', false);
-            $('#minor-3rd').prop('checked', false);
-            $('#augmented-4th').prop('checked', false);
-            $('#perfect-4th').prop('checked', false);
-            $('#augmented-5th').prop('checked', false);
-            $('#diminished-5th').prop('checked', false);
-            $('#perfect-5th').prop('checked', false);
-            $('#major-6th').prop('checked', false);
-            $('#minor-6th').prop('checked', false);
-            $('#diminished-7th').prop('checked', false);
-            $('#major-7th').prop('checked', false);
-            $('#minor-7th').prop('checked', false);
-            $('#augmented-9th').prop('checked', false);
-            $('#major-9th').prop('checked', false);
-            $('#minor-9th').prop('checked', false);
-            $('#perfect-11th').prop('checked', false);
-            $('#major-13th').prop('checked', false);
+            oGlobal.checkGroupBoxes();
         }
-    } else if (sId === "augmented-4th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-4ths').prop('checked', false);
-        }
-    } else if (sId === "augmented-5th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-5ths').prop('checked', false);
-        }
-    } else if (sId === "augmented-9th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-9ths').prop('checked', false);
-        }
-    } else if (sId === "diminished-5th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-5ths').prop('checked', false);
-        }
-    } else if (sId === "diminished-7th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-7ths').prop('checked', false);
-        }
-    } else if (sId === "major-2nd") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-2nds').prop('checked', false);
-        }
-    } else if (sId === "major-3rd") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-3rds').prop('checked', false);
-        }
-    } else if (sId === "major-6th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-6ths').prop('checked', false);
-        }
-    } else if (sId === "major-7th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-7ths').prop('checked', false);
-        }
-    } else if (sId === "major-9th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckCompound();
-            $('#all-9ths').prop('checked', false);
-        }
-    } else if (sId === "major-13th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckCompound();
-        }
-    } else if (sId === "minor-2nd") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-2nds').prop('checked', false);
-        }
-    } else if (sId === "minor-3rd") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-3rds').prop('checked', false);
-        }
-    } else if (sId === "minor-6th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-6ths').prop('checked', false);
-        }
-    } else if (sId === "minor-7th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-7ths').prop('checked', false);
-        }
-    } else if (sId === "minor-9th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckCompound();
-            $('#all-9ths').prop('checked', false);
-        }
-    } else if (sId === "perfect-4th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-4ths').prop('checked', false);
-        }
-    } else if (sId === "perfect-5th") {
-        if (!target.is(':checked')) {
-            oIntervalence.uncheckSimple();
-            $('#all-5ths').prop('checked', false);
-        }
+    } else {
+        oGlobal.setCheckedProperty([sId], bValue);
     }
 };
 
 oIntervalence.handleClearButton = function(event) {
     event.stopPropagation();
-    $('#all-2nds').prop('checked', false);
-    $('#all-3rds').prop('checked', false);
-    $('#all-4ths').prop('checked', false);
-    $('#all-5ths').prop('checked', false);
-    $('#all-6ths').prop('checked', false);
-    $('#all-7ths').prop('checked', false);
-    $('#all-9ths').prop('checked', false);
-    $('#all-simple').prop('checked', false);
-    $('#all-compound').prop('checked', false);
-    $('#all-intervals').prop('checked', false);
-    $('#major-2nd').prop('checked', false);
-    $('#minor-2nd').prop('checked', false);
-    $('#major-3rd').prop('checked', false);
-    $('#minor-3rd').prop('checked', false);
-    $('#augmented-4th').prop('checked', false);
-    $('#perfect-4th').prop('checked', false);
-    $('#augmented-5th').prop('checked', false);
-    $('#diminished-5th').prop('checked', false);
-    $('#perfect-5th').prop('checked', false);
-    $('#major-6th').prop('checked', false);
-    $('#minor-6th').prop('checked', false);
-    $('#diminished-7th').prop('checked', false);
-    $('#major-7th').prop('checked', false);
-    $('#minor-7th').prop('checked', false);
-    $('#augmented-9th').prop('checked', false);
-    $('#major-9th').prop('checked', false);
-    $('#minor-9th').prop('checked', false);
+    oIntervalence.uncheckAllBoxes();
+};
+
+oIntervalence.oIntervals = {
+    bMinor2nd: false,
+    bMajor2nd: false,
+    bMinor3rd: false,
+    bMajor3rd: false,
+    bPerfect4th: false,
+    bAugmented4th: false,
+    bDiminished5th: false,
+    bPerfect5th: false,
+    bAugmented5th: false,
+    bMinor6th: false,
+    bMajor6th: false,
+    bDiminished7th: false,
+    bMinor7th: false,
+    bMajor7th: false,
+    bMinor9th: false,
+    bMajor9th: false,
+    bAugmented9th: false,
+    bPerfect11th: false,
+    bMajor13th: false
+};
+
+oIntervalence.setCheckedProperty = function(aBoxes, bValue) {
+    for(var b = 0; b < aBoxes.length; b++) {
+        var sId = aBoxes[b];
+        $(sId).prop('checked', bValue);
+        var sBoolean = sId.replace(/-/g, "");
+        var sFirst = sBoolean.substring(1, 2);
+        if (sFirst === "m") {
+            sBoolean = sBoolean.replace(/#m/g, "bM");
+        } else if (sFirst === "p") {
+            sBoolean = sBoolean.replace(/#p/g, "bP");
+        } else if (sFirst === "a") {
+            sBoolean = sBoolean.replace(/#a/g, "bA");
+        } else {
+            sBoolean = sBoolean.replace(/#d/g, "bD");
+        }
+        oIntervalence.oIntervals[sBoolean] = bValue;
+        if (bValue === false) {
+            $('#all-intervals').prop('checked', false);
+            var aWords = sId.split("-");
+            var sInterval = aWords[1];
+            var sAll = "#all-" + sInterval + "s";
+            $(sAll).prop('checked', false);
+            if (sInterval.length === 3) {
+                var sQuantity = sInterval.substr(0, 1);
+            } else {
+                var sQuantity = sInterval.substr(0, 2);
+            }
+            var iQuantity = Number(sQuantity);
+            if (iQuantity < 9) {
+                $('#all-simple').prop('checked', false);
+            } else {
+                $('#all-compound').prop('checked', false);
+            }
+        }
+    }
+};
+
+oIntervalence.checkGroupBoxes = function() {
+    var aAllSimple = [
+        '#all-2nds',
+        '#all-3rds',
+        '#all-4ths',
+        '#all-5ths',
+        '#all-6ths',
+        '#all-7ths'
+    ];
+    for(var b = 0; b < aAllSimple.length; b++) {
+        var sId = aAllSimple[b];
+        $(sId).prop('checked', true);
+    }
+};
+
+oIntervalence.uncheckAllBoxes = function() {
+    var oGlobal = oIntervalence;
+    oGlobal.setCheckedProperty(oGlobal.aAll2ndBoxes, false);
+    oGlobal.setCheckedProperty(oGlobal.aAll3rdBoxes, false);
+    oGlobal.setCheckedProperty(oGlobal.aAll4thBoxes, false);
+    oGlobal.setCheckedProperty(oGlobal.aAll5thBoxes, false);
+    oGlobal.setCheckedProperty(oGlobal.aAll6thBoxes, false);
+    oGlobal.setCheckedProperty(oGlobal.aAll7thBoxes, false);
+    oGlobal.setCheckedProperty(oGlobal.aAll9thBoxes, false);
     $('#perfect-11th').prop('checked', false);
     $('#major-13th').prop('checked', false);
 };
 
-oIntervalence.uncheckCompound = function() {
-    $('#all-compound').prop('checked', false);
-    $('#all-intervals').prop('checked', false);
-};
-
-oIntervalence.uncheckSimple = function() {
-    $('#all-simple').prop('checked', false);
-    $('#all-intervals').prop('checked', false);
-};
-
+oIntervalence.uncheckAllBoxes();
 oIntervalence.addMainEventListeners();
