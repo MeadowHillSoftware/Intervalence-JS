@@ -110,6 +110,10 @@ oIntervalence.checkGroupBoxes = function() {
     }
 };
 
+oIntervalence.generateRandomNumber = function(iLength) {
+    return Math.round(Math.random() * (iLength - 1));
+};
+
 oIntervalence.handleCheckbox = function(event) {
     event.stopPropagation();
     var target = $(event.target);
@@ -204,9 +208,21 @@ oIntervalence.handleEnterButton = function(event) {
         sQuality = "Perfect";
     }
     var sDirection = oIntervalence.selectDirection();
+    var sNote = oIntervalence.selectNote();
+    var sLetter = sNote.substr(0, 1);
+    var sAccidental = sNote.substr(1);
+    if (sAccidental === "b") {
+        sAccidental = "Flat";
+        sNote = sLetter + " " + sAccidental;
+    } else if (sAccidental === "#") {
+        sAccidental = "Sharp";
+        sNote = sLetter + " " + sAccidental;
+    } else {
+        sNote = sLetter;
+    }
     var sQuestion = "What is " + sArticle + " " + sQuality + " ";
     sQuestion += sQuantity + sModifier + " " + sDirection;
-    sQuestion += " from letter accidental?";
+    sQuestion += " from " + sNote + "?";
     $('#question')
         .empty()
         .text(sQuestion);
@@ -232,10 +248,6 @@ oIntervalence.oIntervals = {
     bAugmented9th: false,
     bPerfect11th: false,
     bMajor13th: false
-};
-
-oIntervalence.generateRandomNumber = function(iLength) {
-    return Math.round(Math.random() * (iLength - 1));
 };
 
 oIntervalence.selectDirection = function() {
@@ -283,6 +295,30 @@ oIntervalence.selectInterval = function() {
     }
     var iIndex = oIntervalence.generateRandomNumber(aSelected.length);
     return aSelected[iIndex];
+};
+
+oIntervalence.selectNote = function() {
+    var aKeys = [
+        "C", 
+        "C#", 
+        "Db", 
+        "D", 
+        "D#", 
+        "Eb", 
+        "E", 
+        "F", 
+        "F#", 
+        "Gb", 
+        "G", 
+        "G#", 
+        "Ab", 
+        "A", 
+        "A#", 
+        "Bb", 
+        "B"
+    ];
+    var iIndex = oIntervalence.generateRandomNumber(aKeys.length);
+    return aKeys[iIndex];
 };
 
 oIntervalence.setCheckedProperty = function(aBoxes, bValue) {
