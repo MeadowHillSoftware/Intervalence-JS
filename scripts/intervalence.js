@@ -203,7 +203,10 @@ oIntervalence.handleEnterButton = function(event) {
     } else if (sFirst === "P") {
         sQuality = "Perfect";
     }
-    var sQuestion = "What is " + sArticle + " " + sQuality + " " + sQuantity + sModifier + " direction from letter accidental?";
+    var sDirection = oIntervalence.selectDirection();
+    var sQuestion = "What is " + sArticle + " " + sQuality + " ";
+    sQuestion += sQuantity + sModifier + " " + sDirection;
+    sQuestion += " from letter accidental?";
     $('#question')
         .empty()
         .text(sQuestion);
@@ -233,6 +236,12 @@ oIntervalence.oIntervals = {
 
 oIntervalence.generateRandomNumber = function(iLength) {
     return Math.round(Math.random() * (iLength - 1));
+};
+
+oIntervalence.selectDirection = function() {
+    var aDirections = ["down", "up"];
+    var iIndex = oIntervalence.generateRandomNumber(2);
+    return aDirections[iIndex];
 };
 
 oIntervalence.selectInterval = function() {
