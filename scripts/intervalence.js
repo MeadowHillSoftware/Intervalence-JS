@@ -95,6 +95,21 @@ oIntervalence.aAll9thBoxes = [
     '#minor-9th'
 ];
 
+oIntervalence.checkGroupBoxes = function() {
+    var aAllSimple = [
+        '#all-2nds',
+        '#all-3rds',
+        '#all-4ths',
+        '#all-5ths',
+        '#all-6ths',
+        '#all-7ths'
+    ];
+    for(var b = 0; b < aAllSimple.length; b++) {
+        var sId = aAllSimple[b];
+        $(sId).prop('checked', true);
+    }
+};
+
 oIntervalence.handleCheckbox = function(event) {
     event.stopPropagation();
     var target = $(event.target);
@@ -129,7 +144,9 @@ oIntervalence.handleCheckbox = function(event) {
     } else if (sId === "all-compound") {
         oGlobal.setCheckedProperty(oGlobal.aAll9thBoxes, bValue);
         $('#perfect-11th').prop('checked', bValue);
+        oIntervals.bPerfect11th = bValue;
         $('#major-13th').prop('checked', bValue);
+        oIntervals.bMajor13th = bValue;
         if (bValue === true) {
             $('#all-9ths').prop('checked', true);
         }
@@ -142,7 +159,9 @@ oIntervalence.handleCheckbox = function(event) {
         oGlobal.setCheckedProperty(oGlobal.aAll7thBoxes, bValue);
         oGlobal.setCheckedProperty(oGlobal.aAll9thBoxes, bValue);
         $('#perfect-11th').prop('checked', bValue);
+        oIntervals.bPerfect11th = bValue;
         $('#major-13th').prop('checked', bValue);
+        oIntervals.bMajor13th = bValue;
         if (bValue === true) {
             $('#all-simple').prop('checked', true);
             $('#all-9ths').prop('checked', true);
@@ -157,6 +176,37 @@ oIntervalence.handleCheckbox = function(event) {
 oIntervalence.handleClearButton = function(event) {
     event.stopPropagation();
     oIntervalence.uncheckAllBoxes();
+};
+
+oIntervalence.handleEnterButton = function(event) {
+    event.stopPropagation();
+    var sInterval = oIntervalence.selectInterval();
+    var sFirst = sInterval.substr(0, 1);
+    var sArticle = "a";
+    var sQuality = "";
+    var sQuantity = sInterval.substr(1);
+    var sModifier = "th";
+    if (sQuantity === "2") {
+        sModifier = "nd";
+    } else if (sQuantity === "3") {
+        sModifier = "rd";
+    }
+    if (sFirst === "A") {
+        sArticle = "an";
+        sQuality = "Augmented";
+    } else if (sFirst === "d") {
+        sQuality = "diminished";
+    } else if (sFirst === "m") {
+        sQuality = "minor";
+    } else if (sFirst === "M") {
+        sQuality = "Major";
+    } else if (sFirst === "P") {
+        sQuality = "Perfect";
+    }
+    var sQuestion = "What is " + sArticle + " " + sQuality + " " + sQuantity + sModifier + " direction from letter accidental?";
+    $('#question')
+        .empty()
+        .text(sQuestion);
 };
 
 oIntervalence.oIntervals = {
@@ -179,6 +229,51 @@ oIntervalence.oIntervals = {
     bAugmented9th: false,
     bPerfect11th: false,
     bMajor13th: false
+};
+
+oIntervalence.generateRandomNumber = function(iLength) {
+    return Math.round(Math.random() * (iLength - 1));
+};
+
+oIntervalence.selectInterval = function() {
+    var oIntervals = oIntervalence.oIntervals;
+    var aIntervals = Object.keys(oIntervals);
+    var aSelected = [];
+    var aWords = [];
+    var sQuantity = "";
+    var sInterval = "";
+    for (var i = 0; i < aIntervals.length; i++) {
+        var sInterval = aIntervals[i];
+        if (oIntervals[sInterval]) {
+            sInterval = sInterval.substring(1);
+            sInterval = sInterval.slice(0, -2)
+            var sTwo = sInterval.substring(0, 2);
+            if (sTwo === "Mi") {
+                aWords = sInterval.split("Minor");
+                sQuantity = aWords[1];
+                sInterval = "m" + sQuantity;
+            } else if (sTwo === "Ma") {
+                aWords = sInterval.split("Major");
+                sQuantity = aWords[1];
+                sInterval = "M" + sQuantity;
+            } else if (sTwo === "Pe") {
+                aWords = sInterval.split("Perfect");
+                sQuantity = aWords[1];
+                sInterval = "P" + sQuantity;
+            } else if (sTwo === "Au") {
+                aWords = sInterval.split("Augmented");
+                sQuantity = aWords[1];
+                sInterval = "A" + sQuantity;
+            } else if (sTwo === "Di") {
+                aWords = sInterval.split("Diminished");
+                sQuantity = aWords[1];
+                sInterval = "d" + sQuantity;
+            }
+            aSelected.push(sInterval);
+        }
+    }
+    var iIndex = oIntervalence.generateRandomNumber(aSelected.length);
+    return aSelected[iIndex];
 };
 
 oIntervalence.setCheckedProperty = function(aBoxes, bValue) {
@@ -215,21 +310,6 @@ oIntervalence.setCheckedProperty = function(aBoxes, bValue) {
                 $('#all-compound').prop('checked', false);
             }
         }
-    }
-};
-
-oIntervalence.checkGroupBoxes = function() {
-    var aAllSimple = [
-        '#all-2nds',
-        '#all-3rds',
-        '#all-4ths',
-        '#all-5ths',
-        '#all-6ths',
-        '#all-7ths'
-    ];
-    for(var b = 0; b < aAllSimple.length; b++) {
-        var sId = aAllSimple[b];
-        $(sId).prop('checked', true);
     }
 };
 
