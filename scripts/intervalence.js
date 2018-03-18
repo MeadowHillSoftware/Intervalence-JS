@@ -95,6 +95,8 @@ oIntervalence.aAll9thBoxes = [
     '#minor-9th'
 ];
 
+oIntervalence.bQuestioning = true;
+
 oIntervalence.checkGroupBoxes = function() {
     var aAllSimple = [
         '#all-2nds',
@@ -184,150 +186,174 @@ oIntervalence.handleClearButton = function(event) {
 
 oIntervalence.handleEnterButton = function(event) {
     event.stopPropagation();
-    var aDegrees = ["C", "D", "E", "F", "G", "A", "B"];
-    var aHalves = {
-        "m2": 1, 
-        "M2": 2, 
-        "m3": 3, 
-        "M3": 4, 
-        "P4": 5, 
-        "A4": 6, 
-        "d5": 6, 
-        "P5": 7, 
-        "A5": 8, 
-        "m6": 8, 
-        "M6": 9, 
-        "d7": 9, 
-        "m7": 10, 
-        "M7": 11, 
-        "m9": 13, 
-        "M9": 14, 
-        "A9": 15, 
-        "P11": 17, 
-        "M13": 21
-    };
-    var oNotes = {
-        1: ["B#", "C", "Dbb"], 
-        2: ["Bx", "C#", "Db"], 
-        3: ["Cx", "D", "Ebb"], 
-        4: ["D#", "Eb", "Fbb"], 
-        5: ["Dx", "E", "Fb"], 
-        6: ["E#", "F", "Gbb"], 
-        7: ["Ex", "F#", "Gb"], 
-        8: ["Fx", "G", "Abb"], 
-        9: ["G#", "Ab"], 
-        10: ["Gx", "A", "Bbb"], 
-        11: ["A#", "Bb", "Cbb"], 
-        12: ["Ax", "B", "Cb"]
-    };
-    var sInterval = oIntervalence.selectInterval();
-    var sFirst = sInterval.substr(0, 1);
-    var sArticle = "a";
-    var sQuality = "";
-    var sQuantity = sInterval.substr(1);
-    var sModifier = "th";
-    var iQuantity = Number(sQuantity);
-    var iMoves = iQuantity - 1;
-    if (sQuantity === "2") {
-        sModifier = "nd";
-    } else if (sQuantity === "3") {
-        sModifier = "rd";
-    }
-    if (sFirst === "A") {
-        sArticle = "an";
-        sQuality = "Augmented";
-    } else if (sFirst === "d") {
-        sQuality = "diminished";
-    } else if (sFirst === "m") {
-        sQuality = "minor";
-    } else if (sFirst === "M") {
-        sQuality = "Major";
-    } else if (sFirst === "P") {
-        sQuality = "Perfect";
-    }
-    var sDirection = oIntervalence.selectDirection();
-    var sNote = oIntervalence.selectNote();
-    var sLetter = sNote.substr(0, 1);
-    var iStart = aDegrees.indexOf(sLetter);
-    if (sDirection === "up") {
-        var iEnd = iStart + iMoves;
+    if (oIntervalence.bQuestioning === true) {
+        var aDegrees = ["C", "D", "E", "F", "G", "A", "B"];
+        var aHalves = {
+            "m2": 1, 
+            "M2": 2, 
+            "m3": 3, 
+            "M3": 4, 
+            "P4": 5, 
+            "A4": 6, 
+            "d5": 6, 
+            "P5": 7, 
+            "A5": 8, 
+            "m6": 8, 
+            "M6": 9, 
+            "d7": 9, 
+            "m7": 10, 
+            "M7": 11, 
+            "m9": 13, 
+            "M9": 14, 
+            "A9": 15, 
+            "P11": 17, 
+            "M13": 21
+        };
+        var oNotes = {
+            1: ["B#", "C", "Dbb"], 
+            2: ["Bx", "C#", "Db"], 
+            3: ["Cx", "D", "Ebb"], 
+            4: ["D#", "Eb", "Fbb"], 
+            5: ["Dx", "E", "Fb"], 
+            6: ["E#", "F", "Gbb"], 
+            7: ["Ex", "F#", "Gb"], 
+            8: ["Fx", "G", "Abb"], 
+            9: ["G#", "Ab"], 
+            10: ["Gx", "A", "Bbb"], 
+            11: ["A#", "Bb", "Cbb"], 
+            12: ["Ax", "B", "Cb"]
+        };
+        var sInterval = oIntervalence.selectInterval();
+        var sFirst = sInterval.substr(0, 1);
+        var sArticle = "a";
+        var sQuality = "";
+        var sQuantity = sInterval.substr(1);
+        var sModifier = "th";
+        var iQuantity = Number(sQuantity);
+        var iMoves = iQuantity - 1;
+        if (sQuantity === "2") {
+            sModifier = "nd";
+        } else if (sQuantity === "3") {
+            sModifier = "rd";
+        }
+        if (sFirst === "A") {
+            sArticle = "an";
+            sQuality = "Augmented";
+        } else if (sFirst === "d") {
+            sQuality = "diminished";
+        } else if (sFirst === "m") {
+            sQuality = "minor";
+        } else if (sFirst === "M") {
+            sQuality = "Major";
+        } else if (sFirst === "P") {
+            sQuality = "Perfect";
+        }
+        var sDirection = oIntervalence.selectDirection();
+        var sNote = oIntervalence.selectNote();
+        var sLetter = sNote.substr(0, 1);
+        var iStart = aDegrees.indexOf(sLetter);
+        if (sDirection === "up") {
+            var iEnd = iStart + iMoves;
+        } else {
+            var iEnd = iStart - iMoves;
+        }
+        if (iEnd > 6) {
+            while (iEnd > 6) {
+                iEnd -= 7;
+            }
+        }
+        if (iEnd < 0) {
+            while (iEnd < 0) {
+                iEnd += 7;
+            }
+        }
+        var sDegree = aDegrees[iEnd];
+        var iHalfSteps = aHalves[sInterval];
+        var aChromatic = Object.keys(oNotes);
+        for (var i = 0; i < aChromatic.length; i++) {
+            var sNum = aChromatic[i]
+            var aEnharmonics = oNotes[sNum];
+            if (aEnharmonics.indexOf(sNote) !== -1) {
+                var iRoot = Number(sNum);
+            }
+        }
+        var iFinish = 0;
+        if (sDirection === "up") {
+            iFinish = iRoot + iHalfSteps;
+        } else {
+            iFinish = iRoot - iHalfSteps;
+        }
+        if (iFinish > 12) {
+            while (iFinish > 12) {
+                iFinish -= 12;
+            }
+        } else if (iFinish < 1) {
+            while (iFinish < 1) {
+                iFinish += 12;
+            }
+        }
+        var sFinish = String(iFinish);
+        var aEnharmonics = oNotes[sFinish];
+        for (var e = 0; e < aEnharmonics.length; e++) {
+            var sEnharmonic = aEnharmonics[e];
+            if (sEnharmonic.indexOf(sDegree) !== -1) {
+                var sCorrect = sEnharmonic;
+            }
+        }
+        var sCorrectAccidental = sCorrect.substr(1);
+        var sCorrectLetter = sCorrect.substr(0, 1);
+        var sCorrectNote = "";
+        if (sCorrectAccidental === "b") {
+            sCorrectNote = sCorrectLetter + " Flat";
+        } else if (sCorrectAccidental === "bb") {
+            sCorrectNote = sCorrectLetter + " Double-Flat";
+        } else if (sCorrectAccidental === "#") {
+            sCorrectNote = sCorrectLetter + " Sharp";
+        } else if (sCorrectAccidental === "x") {
+            sCorrectNote = sCorrectLetter + " Double-Sharp";
+        } else {
+            sCorrectNote = sCorrectLetter;
+        }
+        oIntervalence.sCorrectNote = sCorrectNote;
+        var sAccidental = sNote.substr(1);
+        if (sAccidental === "b") {
+            sAccidental = "Flat";
+            sNote = sLetter + " " + sAccidental;
+        } else if (sAccidental === "#") {
+            sAccidental = "Sharp";
+            sNote = sLetter + " " + sAccidental;
+        } else {
+            sNote = sLetter;
+        }
+        var sQuestion = "What is " + sArticle + " " + sQuality + " ";
+        sQuestion += sQuantity + sModifier + " " + sDirection;
+        sQuestion += " from " + sNote + "?";
+        $('#question')
+            .empty()
+            .text(sQuestion);
+        $('#results').empty()
+        oIntervalence.bQuestioning = false;
     } else {
-        var iEnd = iStart - iMoves;
-    }
-    if (iEnd > 6) {
-        while (iEnd > 6) {
-            iEnd -= 7;
+        var sCorrectNote = oIntervalence.sCorrectNote;
+        var sUserLetter = $('#letter option:selected').text();
+        var sUserAccidental = $('#accidental option:selected').text();
+        if (sUserAccidental === "Natural") {
+            var sUserAnswer = sUserLetter;
+        } else {
+            var sUserAnswer = sUserLetter + " " + sUserAccidental;
         }
-    }
-    if (iEnd < 0) {
-        while (iEnd < 0) {
-            iEnd += 7;
+        var sMessage = "";
+        if (sUserAnswer === sCorrectNote) {
+            sMessage = "Correct. Good job.";
+        } else {
+            sMessage = "Incorrect. The correct answer is "
+            sMessage += sCorrectNote + ".";
         }
+        $('#results')
+            .empty()
+            .text(sMessage);
+        oIntervalence.bQuestioning = true;
     }
-    var sDegree = aDegrees[iEnd];
-    var iHalfSteps = aHalves[sInterval];
-    var aChromatic = Object.keys(oNotes);
-    for (var i = 0; i < aChromatic.length; i++) {
-        var sNum = aChromatic[i]
-        var aEnharmonics = oNotes[sNum];
-        if (aEnharmonics.indexOf(sNote) !== -1) {
-            var iRoot = Number(sNum);
-        }
-    }
-    var iFinish = 0;
-    if (sDirection === "up") {
-        iFinish = iRoot + iHalfSteps;
-    } else {
-        iFinish = iRoot - iHalfSteps;
-    }
-    if (iFinish > 12) {
-        while (iFinish > 12) {
-            iFinish -= 12;
-        }
-    } else if (iFinish < 1) {
-        while (iFinish < 1) {
-            iFinish += 12;
-        }
-    }
-    var sFinish = String(iFinish);
-    var aEnharmonics = oNotes[sFinish];
-    for (var e = 0; e < aEnharmonics.length; e++) {
-        var sEnharmonic = aEnharmonics[e];
-        if (sEnharmonic.indexOf(sDegree) !== -1) {
-            var sCorrect = sEnharmonic;
-        }
-    }
-    var sCorrectAccidental = sCorrect.substr(1);
-    var sCorrectLetter = sCorrect.substr(0, 1);
-    var sCorrectNote = "";
-    if (sCorrectAccidental === "b") {
-        sCorrectNote = sCorrectLetter + " Flat";
-    } else if (sCorrectAccidental === "bb") {
-        sCorrectNote = sCorrectLetter + " Double-Flat";
-    } else if (sCorrectAccidental === "#") {
-        sCorrectNote = sCorrectLetter + " Sharp";
-    } else if (sCorrectAccidental === "x") {
-        sCorrectNote = sCorrectLetter + " Double-Sharp";
-    } else {
-        sCorrectNote = sCorrectLetter;
-    }
-    console.log(sCorrectNote);
-    var sAccidental = sNote.substr(1);
-    if (sAccidental === "b") {
-        sAccidental = "Flat";
-        sNote = sLetter + " " + sAccidental;
-    } else if (sAccidental === "#") {
-        sAccidental = "Sharp";
-        sNote = sLetter + " " + sAccidental;
-    } else {
-        sNote = sLetter;
-    }
-    var sQuestion = "What is " + sArticle + " " + sQuality + " ";
-    sQuestion += sQuantity + sModifier + " " + sDirection;
-    sQuestion += " from " + sNote + "?";
-    $('#question')
-        .empty()
-        .text(sQuestion);
 };
 
 oIntervalence.oIntervals = {
@@ -351,6 +377,8 @@ oIntervalence.oIntervals = {
     bPerfect11th: false,
     bMajor13th: false
 };
+
+oIntervalence.sCorrectNote = "";
 
 oIntervalence.selectDirection = function() {
     var aDirections = ["down", "up"];
