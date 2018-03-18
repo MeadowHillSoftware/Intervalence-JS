@@ -39,6 +39,8 @@ oIntervalence.addMainEventListeners = function() {
         .on('click', oIntervalence.handleCheckbox);
     $('#enter-button')
         .on('click', oIntervalence.handleEnterButton);
+    $('#grade-button')
+        .on('click', oIntervalence.handleGradeButton);
     $('#major-2nd')
         .on('click', oIntervalence.handleCheckbox);
     $('#major-3rd')
@@ -334,6 +336,7 @@ oIntervalence.handleEnterButton = function(event) {
         $('#results').empty()
         oIntervalence.bQuestioning = false;
     } else {
+        oIntervalence.oGrade.iAnswers++;
         var sCorrectNote = oIntervalence.sCorrectNote;
         var sUserLetter = $('#letter option:selected').text();
         var sUserAccidental = $('#accidental option:selected').text();
@@ -345,6 +348,7 @@ oIntervalence.handleEnterButton = function(event) {
         var sMessage = "";
         if (sUserAnswer === sCorrectNote) {
             sMessage = "Correct. Good job.";
+            oIntervalence.oGrade.iCorrect++;
         } else {
             sMessage = "Incorrect. The correct answer is "
             sMessage += sCorrectNote + ".";
@@ -354,6 +358,45 @@ oIntervalence.handleEnterButton = function(event) {
             .text(sMessage);
         oIntervalence.bQuestioning = true;
     }
+};
+
+oIntervalence.handleGradeButton = function(event) {
+    event.stopPropagation();
+    var iAnswers = oIntervalence.oGrade.iAnswers;
+    if (iAnswers > 0) {
+        var iCorrect = oIntervalence.oGrade.iCorrect;
+        var iQuotient = iCorrect / iAnswers;
+        var iProduct = iQuotient * 100;
+        var iPercent = Math.round(iProduct);
+        var sAdjective = "";
+        if (iPercent === 100) {
+            sAdjective = "Perfect. ";
+        } else if (iPercent > 89) {
+            sAdjective = "Excellent. ";
+        } else if (iPercent > 79) {
+            sAdjective = "Good. ";
+        } else if (iPercent > 69) {
+            sAdjective = "Average. ";
+        } else if (iPercent > 59) {
+            sAdjective = "Poor. ";
+        } else {
+            sAdjective = "Very Poor. ";
+        }
+        var sMessage = sAdjective + "You got ";
+        sMessage += String(iPercent) + "% correct.";
+        $('#results')
+            .empty()
+            .text(sMessage);
+    } else {
+        $('#results')
+            .empty()
+            .text("You haven't answered any questions yet.");
+    }
+};
+
+oIntervalence.oGrade = {
+    iAnswers: 0,
+    iCorrect: 0
 };
 
 oIntervalence.oIntervals = {
